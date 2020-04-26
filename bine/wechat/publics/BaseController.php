@@ -1,6 +1,7 @@
 <?php
 namespace Bine\wechat\publics;
 
+use Bine\wechat\services\JsapiJSSDK;
 use Bine\wechat\services\Webpage;
 
 class BaseController
@@ -20,6 +21,7 @@ class BaseController
             $classify = [
                 new Token($this->config),
                 new Webpage($this->config),
+                new JsapiJSSDK($this->config),
             ];
         }
         $this->_parents = $classify;
