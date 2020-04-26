@@ -8,6 +8,7 @@ use Bine\wechat\services\Webpage;
 
 /**
  * @method Token getAccessToken() 公众号AccessToken
+ * @method Token callbackIP() 获取微信callbackIP地址
  *
  * @method Webpage getCodeUri(array $params) 网页授权，用户同意获取code的路径
  * @method Webpage getCode(array $params) 网页授权，用户同意获取code
@@ -17,8 +18,5 @@ use Bine\wechat\services\Webpage;
  */
 class WechatServer extends BaseController
 {
-//    public function test()
-//    {
-//        return $this->getAccessToken();
-//    }
+
 }

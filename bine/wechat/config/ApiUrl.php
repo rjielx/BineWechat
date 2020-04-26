@@ -1,6 +1,8 @@
 <?php
 namespace Bine\wechat\config;
 
+use GuzzleHttp\Client;
+
 trait ApiUrl
 {
     /**
@@ -55,10 +57,12 @@ trait ApiUrl
      */
     public function ApiRequest($method = 'get',$uri,$params = [])
     {
+        $client = new Client();
+
         if($method == 'get') {
-            $respond = $this->client->request($method, $uri);
+            $respond = $client->request($method, $uri);
         }else{
-            $respond = $this->client->request('post', $uri,['form_params' => $params]);
+            $respond = $client->request('post', $uri,['form_params' => $params]);
         }
         if ($respond->getStatusCode() === 200) {
             $result = json_decode($respond->getBody()->getContents(), true);
