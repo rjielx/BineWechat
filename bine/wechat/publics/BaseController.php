@@ -3,6 +3,7 @@ namespace Bine\wechat\publics;
 
 use Bine\wechat\services\JsapiJSSDK;
 use Bine\wechat\services\Menu;
+use Bine\wechat\services\TemplateMessage;
 use Bine\wechat\services\Webpage;
 
 class BaseController
@@ -20,7 +21,8 @@ class BaseController
                 new Token($this->config),
                 new Webpage($this->config),
                 new JsapiJSSDK($this->config),
-                new Menu($this->config)
+                new Menu($this->config),
+                new TemplateMessage($this->config),
             ];
         }
         $this->_parents = $classify;
