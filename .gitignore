@@ -29,7 +29,7 @@ yarn-error.log
 .styleci.yml
 artisan
 
-
+composer.json
 composer.lock
 package.json
 phpunit.xml
