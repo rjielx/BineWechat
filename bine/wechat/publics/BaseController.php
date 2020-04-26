@@ -12,10 +12,7 @@ class BaseController
 
     public function __construct(array $config = array(),array $classify = array()) {
         if(!$config){
-            $config = [
-                'appID' => 'wxdba83484aecd9340',
-                'appsecret' => 'c8e8535748f31706f7874d5dbd25ba87'
-            ];
+            throw new \Exception('配置错误');
         }
         $this->config = $config;
 
