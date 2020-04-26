@@ -2,14 +2,12 @@
 namespace Bine\wechat\publics;
 
 use Bine\wechat\services\JsapiJSSDK;
+use Bine\wechat\services\Menu;
 use Bine\wechat\services\Webpage;
 
 class BaseController
 {
     use Property;
-
-    protected $_parents = array();
-
 
     public function __construct(array $config = array(),array $classify = array()) {
         if(!$config){
@@ -22,6 +20,7 @@ class BaseController
                 new Token($this->config),
                 new Webpage($this->config),
                 new JsapiJSSDK($this->config),
+                new Menu($this->config)
             ];
         }
         $this->_parents = $classify;

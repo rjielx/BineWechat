@@ -5,6 +5,7 @@ namespace Bine\wechat;
 use Bine\wechat\publics\BaseController;
 use Bine\wechat\publics\Token;
 use Bine\wechat\services\JsapiJSSDK;
+use Bine\wechat\services\Menu;
 use Bine\wechat\services\Webpage;
 
 /**
@@ -19,6 +20,10 @@ use Bine\wechat\services\Webpage;
  *
  * @method JsapiJSSDK ticket() JS-SDK验证
  * @method JsapiJSSDK initWXJSInterface(string $url,array $jsApiList) 初始JS-SDK配置参数
+ *
+ * @method Menu setMenu(array $data, $data_type = 'array') 创建公众号菜单
+ * @method Menu queryMenu() 查询公众号菜单信息
+ * @method Menu deleteMenu() 删除公众号菜单
  */
 class WechatServer extends BaseController
 {
