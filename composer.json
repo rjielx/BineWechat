@@ -1,0 +1,24 @@
+{
+    "name": "rjielx/binewechat",
+    "description": "WeChat official account.",
+    "authors": [
+        {
+            "name": "rjielx",
+            "email": "1542235034@qq.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.2.5",
+        "guzzlehttp/guzzle": "^6.3",
+        "laravel/framework": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bine\\": "bine/"
+        },
+        "classmap": [
+            "bine"
+        ]
+    }
+}
