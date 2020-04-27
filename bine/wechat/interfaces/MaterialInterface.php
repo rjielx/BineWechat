@@ -33,7 +33,18 @@ interface MaterialInterface
 
     /**
      * @Author RJie
+     * @param $articles
      * @return mixed
      */
-    public function materialAddNews();
+    public function materialAddNews($articles);
+
+    /**
+     * @Author RJie
+     * @param $content
+     * @param string $type
+     * @param string $is_filter
+     * @param array $people
+     * @return mixed
+     */
+    public function groupSending($content, $type = 'news', $is_filter = 'test',array $people=[]);
 }

@@ -17,10 +17,12 @@ class BaseController
      * @param array $classify
      * @throws \ErrorException
      */
-    public function __construct(array $config = array(),array $classify = array()) {
-        if(!$config){
+    public function __construct(array $config = array(),array $classify = array())
+    {
+        if(!$config || !array_key_exists('appID',$config) || !array_key_exists('appsecret',$config)){
             throw new \ErrorException('配置错误');
         }
+
         $this->config = $config;
 
         if(!$classify) {
