@@ -5,6 +5,7 @@ namespace Bine\wechat;
 use Bine\wechat\publics\BaseController;
 use Bine\wechat\publics\Token;
 use Bine\wechat\services\JsapiJSSDK;
+use Bine\wechat\services\Material;
 use Bine\wechat\services\Menu;
 use Bine\wechat\services\TemplateMessage;
 use Bine\wechat\services\Webpage;
@@ -30,6 +31,13 @@ use Bine\wechat\services\Webpage;
  * @method TemplateMessage setIndustry(int $industry_id1, int $industry_id2) 设置所属行业
  * @method TemplateMessage getAllPrivateTemplate() 查询所有模板信息
  * @method TemplateMessage delPrivateTemplate(string $template_id) 删除模板
+ * @method TemplateMessage sendTemplateMessage(array $data) 发送模板消息
+ *
+ * @method Material getMaterialCount() 查询素材总数
+ * @method Material getMaterialList($type = 'image') 查询永久素材列表
+ * @method Material uploadImg(string $image) 上传图文消息内的图片获取URL
+ * @method Material addMaterial(string $img_url, $type = 'image') 新增其他类型永久素材
+ * @method Material materialAddNews() 新增永久图文素材
  */
 class WechatServer extends BaseController
 {

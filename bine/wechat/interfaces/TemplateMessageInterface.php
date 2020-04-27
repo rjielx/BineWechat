@@ -30,4 +30,11 @@ interface TemplateMessageInterface
      * @return mixed
      */
     public function delPrivateTemplate($template_id);
+
+    /**
+     * @Author RJie
+     * @param array $data
+     * @return mixed
+     */
+    public function sendTemplateMessage(array $data);
 }

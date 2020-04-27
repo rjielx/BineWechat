@@ -74,11 +74,27 @@ class TemplateMessage extends Controller implements TemplateMessageInterface
     {
         $url = static::$uri . 'https://api.weixin.qq.com/cgi-bin/template/del_private_template?access_token=' . $this->getAccessToken;
 
-        $params =[
+        $params = [
             'template_id' => $template_id
         ];
 
         $result = $this->ApiRequest('post', $url, $params);
+        return $result;
+    }
+
+    /**
+     * 发送模板消息
+     *
+     * @Author RJie
+     * @param array $data
+     * @return mixed
+     * @throws \Exception
+     */
+    public function sendTemplateMessage(array $data)
+    {
+        $url = static::$uri . '/cgi-bin/message/template/send?access_token=' . $this->getAccessToken;
+
+        $result = $this->ApiRequest('post',$url,$data,'json');
         return $result;
     }
 }

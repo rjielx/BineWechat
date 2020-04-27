@@ -2,6 +2,7 @@
 namespace Bine\wechat\publics;
 
 use Bine\wechat\services\JsapiJSSDK;
+use Bine\wechat\services\Material;
 use Bine\wechat\services\Menu;
 use Bine\wechat\services\TemplateMessage;
 use Bine\wechat\services\Webpage;
@@ -10,19 +11,26 @@ class BaseController
 {
     use Property;
 
+    /**
+     * BaseController constructor.
+     * @param array $config
+     * @param array $classify
+     * @throws \ErrorException
+     */
     public function __construct(array $config = array(),array $classify = array()) {
         if(!$config){
-            throw new \Exception('配置错误');
+            throw new \ErrorException('配置错误');
         }
         $this->config = $config;
 
         if(!$classify) {
             $classify = [
-                new Token($this->config),
-                new Webpage($this->config),
-                new JsapiJSSDK($this->config),
-                new Menu($this->config),
-                new TemplateMessage($this->config),
+                new Token($config),
+                new Webpage($config),
+                new JsapiJSSDK($config),
+                new Menu($config),
+                new TemplateMessage($config),
+                new Material($config),
             ];
         }
         $this->_parents = $classify;

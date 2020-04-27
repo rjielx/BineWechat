@@ -1,4 +1,5 @@
 <?php
+
 namespace Bine\wechat\services;
 
 use Bine\wechat\interfaces\JsapiJSSDKInterface;
@@ -16,7 +17,7 @@ class JsapiJSSDK extends Controller implements JsapiJSSDKInterface
     {
         $access_token = $this->getAccessToken;
         $time = now()->addSeconds(7200);
-        return Cache::remember('ticket', $time, function () use ($access_token) {
+        return Cache::remember('ticket' . $this->config['appID'], $time, function () use ($access_token) {
             $uri = static::$uri . '/cgi-bin/ticket/getticket?access_token=' . $access_token . '&type=jsapi';
             $json = file_get_contents($uri);
             $result = json_decode($json, true);

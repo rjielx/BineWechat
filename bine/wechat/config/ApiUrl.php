@@ -52,18 +52,25 @@ trait ApiUrl
      * @param string $method
      * @param $uri
      * @param array $params
+     * @param string $body
      * @return mixed
      * @throws \Exception
      */
-    public function ApiRequest($method = 'get',$uri,$params = [])
+    public function ApiRequest($method = 'get',$uri,$params = [],$body = 'form_params')
     {
         $client = new Client();
 
         if($method == 'get') {
-            $respond = $client->request($method, $uri);
-        }else{
-            $respond = $client->request('post', $uri,['form_params' => $params]);
+            $body = 'query';
         }
+
+        if($params){
+            $respond = $client->request($method, $uri,[$body => $params]);
+        }else{
+            $respond = $client->request($method, $uri);
+        }
+
+
         if ($respond->getStatusCode() === 200) {
             $result = json_decode($respond->getBody()->getContents(), true);
 
@@ -71,5 +78,27 @@ trait ApiUrl
         } else {
             throw new \Exception('请求失败');
         }
+    }
+
+    /**
+     * @Author RJie
+     * @param $url
+     * @param $data
+     * @return bool|string
+     */
+    public function curl_post($url,$data)
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($curl);
+        $error = curl_error($curl);
+        curl_close($curl);
+        $output = json_decode($output,true);
+        return ['exec' => $output,'error' => $error];
     }
 }
