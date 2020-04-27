@@ -4,9 +4,10 @@ namespace Bine\wechat\publics;
 
 
 use Bine\wechat\config\ApiUrl;
+use Bine\wechat\interfaces\TokenInterface;
 use Illuminate\Support\Facades\Cache;
 
-class Token
+class Token implements TokenInterface
 {
     use ApiUrl, Property;
 
@@ -24,13 +25,11 @@ class Token
     {
         $config = $this->config;
         $time = now()->addSeconds(7200);
-        return Cache::remember('access_token', $time, function () use ($config) {
+        return Cache::remember('access_token_' . $config['appID'], $time, function () use ($config) {
             $api_url = static::$uri . "/cgi-bin/token?grant_type=client_credential&appid=" . $config['appID'] . "&secret=" . $config['appsecret'];
 
             $json = file_get_contents($api_url);
-
             $result = json_decode($json, true);
-
             return $result['access_token'];
         });
     }

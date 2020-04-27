@@ -1,10 +1,11 @@
 <?php
 namespace Bine\wechat\services;
 
+use Bine\wechat\interfaces\JsapiJSSDKInterface;
 use Bine\wechat\publics\Controller;
 use Illuminate\Support\Facades\Cache;
 
-class JsapiJSSDK extends Controller
+class JsapiJSSDK extends Controller implements JsapiJSSDKInterface
 {
     /**
      * JS-SDK验证

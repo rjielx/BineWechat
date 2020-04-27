@@ -2,9 +2,11 @@
 
 namespace Bine\wechat\services;
 
+
+use Bine\wechat\interfaces\TemplateMessageInterface;
 use Bine\wechat\publics\Controller;
 
-class TemplateMessage extends Controller
+class TemplateMessage extends Controller implements TemplateMessageInterface
 {
 
     /**

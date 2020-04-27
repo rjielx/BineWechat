@@ -1,9 +1,10 @@
 <?php
 namespace Bine\wechat\services;
 
+use Bine\wechat\interfaces\WebpageInterface;
 use Bine\wechat\publics\Controller;
 
-class Webpage extends Controller
+class Webpage extends Controller implements WebpageInterface
 {
     /**
      * 网页授权，用户同意获取code的路径

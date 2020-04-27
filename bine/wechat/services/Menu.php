@@ -1,9 +1,10 @@
 <?php
 namespace Bine\wechat\services;
 
+use Bine\wechat\interfaces\MenuInterface;
 use Bine\wechat\publics\Controller;
 
-class Menu extends Controller
+class Menu extends Controller implements MenuInterface
 {
     /**
      * 创建公众号菜单
