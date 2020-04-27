@@ -231,6 +231,9 @@ class Material extends Controller implements MaterialInterface
                 'tag_id' => $people['tag_id'] ?? '',
             ];
         } elseif ($is_filter == 'touser') {
+            if($people['touser'] || !is_array($people['touser'])){
+                throw new \ErrorException('openid格式错误');
+            }
             $data['touser'] = $people['touser'];
         } elseif ($is_filter == 'test') {
             $data['touser'] = 'oKvOqwmQW-PT1f2ws4-b0fu7FzAA';
