@@ -9,6 +9,7 @@ use Bine\wechat\services\Material;
 use Bine\wechat\services\Menu;
 use Bine\wechat\services\message\MassMessage;
 use Bine\wechat\services\message\TemplateMessage;
+use Bine\wechat\services\userManage\Tags;
 use Bine\wechat\services\Webpage;
 
 /**
@@ -43,8 +44,14 @@ use Bine\wechat\services\Webpage;
  * @method Material delMaterial(string $media_id) 删除永久素材
  * @method Material materialUpdateNews(array $params) 修改永久图文素材
  *
- * @method MassMessage groupSending(string $content, array $people = [],string $type = 'news',string $is_filter = 'test') 群发消息
+ * @method MassMessage groupSending(string $content, array $people = [],string $type = 'news',string $is_filter = 'filter') 群发消息
  * @method MassMessage massDelete(string $msg_id,int $article_idx = 0) 删除群发
+ *
+ * @method Tags tagsCreate(string $tag_name) 创建标签
+ * @method Tags getTags() 获取公众号已创建的标签
+ * @method Tags tagsUpdate(int $tag_id,string $tag_name) 编辑标签
+ * @method Tags tagsDelete(int $tag_id) 删除标签
+ * @method Tags getUserTags(int $tag_id,string $next_openid = '') 获取标签下粉丝列表
  */
 class WechatServer extends BaseController
 {

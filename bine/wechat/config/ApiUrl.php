@@ -98,7 +98,10 @@ trait ApiUrl
         $output = curl_exec($curl);
         $error = curl_error($curl);
         curl_close($curl);
+        if($error){
+            return $error;
+        }
         $output = json_decode($output,true);
-        return ['exec' => $output,'error' => $error];
+        return $output;
     }
 }
