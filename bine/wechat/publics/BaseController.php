@@ -4,7 +4,8 @@ namespace Bine\wechat\publics;
 use Bine\wechat\services\JsapiJSSDK;
 use Bine\wechat\services\Material;
 use Bine\wechat\services\Menu;
-use Bine\wechat\services\TemplateMessage;
+use Bine\wechat\services\message\MassMessage;
+use Bine\wechat\services\message\TemplateMessage;
 use Bine\wechat\services\Webpage;
 
 class BaseController
@@ -32,6 +33,7 @@ class BaseController
                 new JsapiJSSDK($config),
                 new Menu($config),
                 new TemplateMessage($config),
+                new MassMessage($config),
                 new Material($config),
             ];
         }

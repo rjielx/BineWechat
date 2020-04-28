@@ -1,4 +1,5 @@
 <?php
+
 namespace Bine\wechat\interfaces;
 
 interface MaterialInterface
@@ -40,11 +41,22 @@ interface MaterialInterface
 
     /**
      * @Author RJie
-     * @param $content
-     * @param string $type
-     * @param string $is_filter
-     * @param array $people
+     * @param $media_id
      * @return mixed
      */
-    public function groupSending($content, $type = 'news', $is_filter = 'test',array $people=[]);
+    public function getMaterial($media_id);
+
+    /**
+     * @Author RJie
+     * @param $media_id
+     * @return mixed
+     */
+    public function delMaterial($media_id);
+
+    /**
+     * @Author RJie
+     * @param array $params
+     * @return mixed
+     */
+    public function materialUpdateNews(array $params);
 }

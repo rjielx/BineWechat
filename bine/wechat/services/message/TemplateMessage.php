@@ -1,6 +1,6 @@
 <?php
 
-namespace Bine\wechat\services;
+namespace Bine\wechat\services\message;
 
 
 use Bine\wechat\interfaces\TemplateMessageInterface;

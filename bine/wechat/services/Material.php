@@ -200,82 +200,101 @@ class Material extends Controller implements MaterialInterface
         return $result;
     }
 
+
     /**
-     * 群发消息
+     * 获取永久素材
      *
      * @Author RJie
-     * @param $content
-     * @param string $type
-     * @param string $is_filter
-     * @param array $people
-     * @return bool|string
+     * @param $media_id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getMaterial($media_id)
+    {
+        $url = static::$uri . '/cgi-bin/material/get_material?access_token=' . $this->getAccessToken;
+
+        $data['media_id'] = $media_id;
+
+        $result = $this->ApiRequest('post', $url, $data, 'json');
+        return $result;
+    }
+
+    /**
+     * 删除永久素材
+     *
+     * @Author RJie
+     * @param $media_id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function delMaterial($media_id)
+    {
+        $url = static::$uri . '/cgi-bin/material/del_material?access_token=' . $this->getAccessToken;
+
+        $data['media_id'] = $media_id;
+
+        $result = $this->ApiRequest('post', $url, $data, 'json');
+        return $result;
+    }
+
+    /**
+     * 修改永久图文素材
+     *
+     * @Author RJie
+     * @param array $params
+     * @return bool|mixed|string
      * @throws \ErrorException
      */
-    public function groupSending($content, $type = 'news', $is_filter = 'test',array $people=[])
+    public function materialUpdateNews(array $params)
     {
-        // 发送路径
-        $url = '';
-        if ($is_filter == 'filter') {
-            $url = static::$uri . '/cgi-bin/message/mass/sendall?access_token=' . $this->getAccessToken;
-        } elseif ($is_filter == 'touser') {
-            $url = static::$uri . '/cgi-bin/message/mass/send?access_token=' . $this->getAccessToken;
-        } elseif ($is_filter == 'test') { //TODO 测试号路径
-            $url = static::$uri . "/cgi-bin/message/mass/preview?access_token=" . $this->getAccessToken;
-        }
+        $url = static::$uri . '/cgi-bin/material/update_news?access_token=' . $this->getAccessToken;
 
-        // 发送内容
-        $data = [];
-        if ($is_filter == 'filter') {
-            $data['filter'] = [
-                'is_to_all' => $people['is_to_all'] ?? true,
-                'tag_id' => $people['tag_id'] ?? '',
-            ];
-        } elseif ($is_filter == 'touser') {
-            if($people['touser'] || !is_array($people['touser'])){
-                throw new \ErrorException('openid格式错误');
+        try {
+
+            $data = [];
+            if(array_key_exists('media_id',$params)){
+                $data['media_id'] = $params['media_id'];
+            }else{
+                throw new \ErrorException('要修改的图文消息的id不能为空',700);
             }
-            $data['touser'] = $people['touser'];
-        } elseif ($is_filter == 'test') {
-            $data['touser'] = 'oKvOqwmQW-PT1f2ws4-b0fu7FzAA';
-        }
 
-        switch ($type) {
-            case 'news': //图文消息发送
-                $media_id = $content;
-                if (!$media_id) {
-                    throw new \ErrorException('图文素材ID不能为空');
-                }
+            $data['index'] = array_key_exists('index',$params) ?? 0;
 
-                $data['mpnews'] = [
-                    'media_id' => $media_id
-                ];
-                $data['msgtype'] = 'mpnews';
-                $data['send_ignore_reprint'] = 0;
+            if(!array_key_exists('articles',$params)){
+                throw new \ErrorException('修改内容不能为空',702);
+            }
 
-                break;
-            case 'text': //文本群发消息
-                $content = $content;
-                if (!$content) {
-                    throw new \ErrorException('文本消息不能为空');
-                }
+            $articles = $params['articles'];
+            if(!array_key_exists('title',$articles)){
+                throw new \ErrorException('标题不能为空',702);
+            }
+            if(!array_key_exists('thumb_media_id',$articles)){
+                throw new \ErrorException('图文消息的封面图片素材id不能为空',702);
+            }
+            if(!array_key_exists('author',$articles)){
+                throw new \ErrorException('作者不能为空',702);
+            }
+            if(!array_key_exists('digest',$articles)){
+                throw new \ErrorException('图文消息的摘要',702);
+            }
+            if(!array_key_exists('show_cover_pic',$articles)){
+                $articles['show_cover_pic'] = 0;
+            }
+            if(!array_key_exists('content',$articles)){
+                throw new \ErrorException('图文消息的具体内容不能为空',702);
+            }
+            if(!array_key_exists('content_source_url',$articles)){
+                $articles['content_source_url'] = '';
+            }
 
-                $data['text'] = ['content' => $content];
-                $data['msgtype'] = 'text';
-
-                break;
-            case 'image': //图片群发消息
-                $media_id = $content;
-                if (!$media_id) {
-                    throw new \ErrorException('图文素材ID不能为空');
-                }
-
-                $data['image'] = ['media_id' => $media_id];
-                $data['msgtype'] = 'image';
-
-                break;
+            $data['articles'] = $articles;
+        } catch (\Exception $e) {
+            throw new \ErrorException($e->getMessage(),702);
         }
 
         $result = $this->curl_post($url, json_encode($data, JSON_UNESCAPED_UNICODE));
         return $result;
     }
+
+
 }

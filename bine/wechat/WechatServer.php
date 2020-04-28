@@ -7,7 +7,8 @@ use Bine\wechat\publics\Token;
 use Bine\wechat\services\JsapiJSSDK;
 use Bine\wechat\services\Material;
 use Bine\wechat\services\Menu;
-use Bine\wechat\services\TemplateMessage;
+use Bine\wechat\services\message\MassMessage;
+use Bine\wechat\services\message\TemplateMessage;
 use Bine\wechat\services\Webpage;
 
 /**
@@ -23,7 +24,7 @@ use Bine\wechat\services\Webpage;
  * @method JsapiJSSDK ticket() JS-SDK验证
  * @method JsapiJSSDK initWXJSInterface(string $url, array $jsApiList) 初始JS-SDK配置参数
  *
- * @method Menu setMenu(array $data, $data_type = 'array') 创建公众号菜单
+ * @method Menu setMenu(array $data,string $data_type = 'array') 创建公众号菜单
  * @method Menu queryMenu() 查询公众号菜单信息
  * @method Menu deleteMenu() 删除公众号菜单
  *
@@ -34,10 +35,16 @@ use Bine\wechat\services\Webpage;
  * @method TemplateMessage sendTemplateMessage(array $data) 发送模板消息
  *
  * @method Material getMaterialCount() 查询素材总数
- * @method Material getMaterialList($type = 'image') 查询永久素材列表
+ * @method Material getMaterialList(string $type = 'image') 查询永久素材列表
  * @method Material uploadImg(string $image) 上传图文消息内的图片获取URL
- * @method Material addMaterial(string $img_url, $type = 'image') 新增其他类型永久素材
+ * @method Material addMaterial(string $img_url,string $type = 'image') 新增其他类型永久素材
  * @method Material materialAddNews() 新增永久图文素材
+ * @method Material getMaterial(string $media_id) 获取永久素材
+ * @method Material delMaterial(string $media_id) 删除永久素材
+ * @method Material materialUpdateNews(array $params) 修改永久图文素材
+ *
+ * @method MassMessage groupSending(string $content, array $people = [],string $type = 'news',string $is_filter = 'test') 群发消息
+ * @method MassMessage massDelete(string $msg_id,int $article_idx = 0) 删除群发
  */
 class WechatServer extends BaseController
 {
