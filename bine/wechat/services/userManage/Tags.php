@@ -106,7 +106,17 @@ class Tags extends Controller implements TagsInterface
             'next_openid' => $next_openid
         ];
 
-        $result = $this->ApiRequest('post',$url,$data,'json');
+        $result = $this->ApiRequest('post', $url, $data, 'json');
         return $result;
+    }
+
+
+    public function batchtagging()
+    {
+        $url = static::$uri . '/cgi-bin/tags/members/batchtagging?access_token=' . $this->getAccessToken;
+
+        $data = [
+
+        ];
     }
 }
