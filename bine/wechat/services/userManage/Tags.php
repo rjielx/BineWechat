@@ -110,13 +110,68 @@ class Tags extends Controller implements TagsInterface
         return $result;
     }
 
-
-    public function batchtagging()
+    /**
+     * 批量为用户打标签
+     *
+     * @Author RJie
+     * @param $tag_id
+     * @param array $opinid_list
+     * @return mixed
+     * @throws \Exception
+     */
+    public function batchTagging($tag_id, array $opinid_list)
     {
         $url = static::$uri . '/cgi-bin/tags/members/batchtagging?access_token=' . $this->getAccessToken;
 
         $data = [
-
+            "openid_list" => $opinid_list,
+            "tagid" => $tag_id
         ];
+
+        $result = $this->ApiRequest('post', $url, $data, 'json');
+        return $result;
+    }
+
+
+    /**
+     * 批量为用户取消标签
+     *
+     * @Author RJie
+     * @param $tag_id
+     * @param array $opinid_list
+     * @return mixed
+     * @throws \Exception
+     */
+    public function batchUnTagging($tag_id, array $opinid_list)
+    {
+        $url = static::$uri . '/cgi-bin/tags/members/batchuntagging?access_token=' . $this->getAccessToken;
+
+        $data = [
+            "openid_list" => $opinid_list,
+            "tagid" => $tag_id
+        ];
+
+        $result = $this->ApiRequest('post', $url, $data, 'json');
+        return $result;
+    }
+
+
+    /**
+     * 获取用户身上的标签列表
+     *
+     * @Author RJie
+     * @param $openid
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getIdList($openid)
+    {
+        $url = static::$uri . '/cgi-bin/tags/getidlist?access_token=' . $this->getAccessToken;
+        $data = [
+            'openid' => $openid
+        ];
+
+        $result = $this->ApiRequest('post', $url, $data, 'json');
+        return $result;
     }
 }

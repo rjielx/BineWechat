@@ -6,7 +6,9 @@ use Bine\wechat\services\Material;
 use Bine\wechat\services\Menu;
 use Bine\wechat\services\message\MassMessage;
 use Bine\wechat\services\message\TemplateMessage;
+use Bine\wechat\services\userManage\Blacklist;
 use Bine\wechat\services\userManage\Tags;
+use Bine\wechat\services\userManage\UserList;
 use Bine\wechat\services\Webpage;
 
 class BaseController
@@ -37,6 +39,8 @@ class BaseController
                 new Material($config),
                 new MassMessage($config),
                 new Tags($config),
+                new UserList($config),
+                new Blacklist($config),
             ];
         }
         $this->_parents = $classify;
