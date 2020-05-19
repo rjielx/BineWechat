@@ -1,9 +1,10 @@
 <?php
 namespace Bine\wechat\services\userManage;
 
+use Bine\wechat\interfaces\UserListInterface;
 use Bine\wechat\publics\Controller;
 
-class UserList extends Controller
+class UserList extends Controller implements UserListInterface
 {
     /**
      * 获取用户列表

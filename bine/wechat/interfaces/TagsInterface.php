@@ -38,4 +38,30 @@ interface TagsInterface
      * @return mixed
      */
     public function getUserTags($tag_id, $next_openid = '');
+
+
+    /**
+     * @Author RJie
+     * @param $tag_id
+     * @param array $opinid_list
+     * @return mixed
+     */
+    public function batchTagging($tag_id, array $opinid_list);
+
+
+    /**
+     * @Author RJie
+     * @param $tag_id
+     * @param array $opinid_list
+     * @return mixed
+     */
+    public function batchUnTagging($tag_id, array $opinid_list);
+
+
+    /**
+     * @Author RJie
+     * @param $openid
+     * @return mixed
+     */
+    public function getIdList($openid);
 }

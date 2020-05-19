@@ -2,9 +2,10 @@
 
 namespace Bine\wechat\services\userManage;
 
+use Bine\wechat\interfaces\BlacklistInterface;
 use Bine\wechat\publics\Controller;
 
-class Blacklist extends Controller
+class Blacklist extends Controller implements BlacklistInterface
 {
     /**
      * 获取公众号的黑名单列表
